@@ -10,7 +10,7 @@ const { Server } = require("socket.io");
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5003;
 require("dotenv").config();
 
 const env = {
@@ -21,9 +21,12 @@ const env = {
 
 app.use(express.json());
 app.use(cors());
+
+const pass = env.BASIC_PASS || "murphy";
+
 app.use(
   basicAuth({
-    users: { engine: env.BASIC_PASS },
+    users: { engine: pass },
   })
 );
 
@@ -63,7 +66,7 @@ client.on("message", async (message) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Jarvis Engine Ready v1.0.0");
+  res.send("Jarvis Engine Ready v1.0.1");
 });
 
 app.post("/ask", body("q").notEmpty().isString().trim(), async (req, res) => {
@@ -87,5 +90,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(port, () => {
-  console.log(`Port Listen on ${port}`);
+  console.log(`Jarvis v1.0.1 Port Listen on ${port}`);
 });
