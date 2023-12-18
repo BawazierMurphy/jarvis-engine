@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN sudo npm install -g --unsafe-perm=true --allow-root
+RUN npm install --unsafe-perm=true --allow-root
 # If you are building your code for production
 # RUN npm ci --omit=dev
 
