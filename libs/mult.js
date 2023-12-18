@@ -42,7 +42,9 @@ const mult = (req, res, next) => {
       const maxSize = 4 * 1024 * 1024; // 4MB
 
       if (!allowedTypes.includes(file.mimetype)) {
-        errors.push(`Invalid file type: ${file.originalname}`);
+        errors.push(
+          `Invalid file type: (${file.originalname}<---->${file.mimetype})`
+        );
       }
 
       if (file.size > maxSize) {
