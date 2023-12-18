@@ -32,12 +32,7 @@ const mult = (req, res, next) => {
 
     // Validate file types and sizes
     files.forEach((file) => {
-      const allowedTypes = ["image/jpeg", "image/png"];
       const maxSize = 4 * 1024 * 1024; // 4MB
-
-      if (!allowedTypes.includes(file.mimetype)) {
-        errors.push(`Invalid file type: ${file.originalname}`);
-      }
 
       if (file.size > maxSize) {
         errors.push(`File too large: ${file.originalname}`);
